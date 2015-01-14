@@ -6,5 +6,5 @@
 3. Divide all values by the highest value so the highest will be 1, the lowest will be zero, and the rest will be between zero and one.
 3. Multiply all values by 100 OR the number of pixels wide we want the map to be.
 4. Convert all values from doubles to ints to round them off.
-4. Repeat this process for the longitude values.
+4. Repeat this process for the longitude values.  
 Nat
