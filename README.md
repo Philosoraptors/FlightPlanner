@@ -4,4 +4,4 @@
 2. Find the highest lattitude and divide all enties by it
 3. Multiply all values by 100 OR the number of pixels wide we want the map to be.
 4. Repeat this process for the longitude values.  
-  - Nat
+Nat
