@@ -3,8 +3,8 @@ import javax.swing.*;
 
 public class AirMap extends JPanel{ 
 
-  private static final int WIDTH = 500;
-  private static final int HEIGHT = 500;
+  private static final int WIDTH = 1000;
+  private static final int HEIGHT = 1000;
   private static final int PADDING = 20;
 
   private static float minLng, maxLng, minLat, maxLat;
@@ -36,13 +36,21 @@ public class AirMap extends JPanel{
     float scale;
     float latRange = maxLat - minLat;
     float lngRange = maxLng - minLng;
-    if (latRange > lngRange) scale = (WIDTH - PADDING * 2) / latRange; else scale = (HEIGHT - PADDING * 2) / lngRange;
+    if (latRange > lngRange) {
+      scale = (WIDTH - PADDING * 2) / latRange;
+    } else {
+      scale = (HEIGHT - PADDING * 2) / lngRange;
+    }
     
     for (int i = 0; i < Airport.Airports.size(); i++) {
       Airport airport = Airport.Airports.get(i);
-      int y = (int)((airport.lat() - minLat) * scale) + PADDING;
+      int y = HEIGHT - PADDING - (int)((airport.lat() - minLat) * scale);
       int x = (int)((airport.lng() - minLng) * scale) + PADDING;
       gr.drawString(airport.name(), x, y);
+      
+      System.out.println(airport.name());
+      System.out.println("X: " + x + ", Y: " + y);
+      System.out.println("LAT: " + airport.lat() + ", LNG: " + airport.lng());
     }
   }
 }
