@@ -26,6 +26,8 @@ public class Airport {
   ////////////////////////////////////// instance methods ((this) is an instance of Airport)
  
    public String name(){ return name; }
+   public float lat() { return latitude; }
+   public float lng() { return longitude; }
    public ArrayList<Flight> departures () { return departures; }
 
    public String toString(){
