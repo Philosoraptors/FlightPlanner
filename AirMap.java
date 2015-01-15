@@ -3,16 +3,16 @@ import javax.swing.*;
 
 public class AirMap extends JPanel{ 
 
-  private static final int WIDTH = 1000;
-  private static final int HEIGHT = 1000;
-  private static final int PADDING = 20;
+  private static final int WIDTH = 500;
+  private static final int HEIGHT = 500;
+  private static final int PADDING = 30;
 
   private static float minLng, maxLng, minLat, maxLat;
 
   public static void showMap(){
     JFrame frame = new JFrame("flight map");
     AirMap map = new AirMap();
-    map.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+    map.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     frame.getContentPane().add(map);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
     frame.pack();
@@ -34,23 +34,24 @@ public class AirMap extends JPanel{
     super.paintComponent(gr);
     
     float scale;
+    int yMin, xMin;
     float latRange = maxLat - minLat;
     float lngRange = maxLng - minLng;
     if (latRange > lngRange) {
-      scale = (WIDTH - PADDING * 2) / latRange;
+      scale = (getHeight() - PADDING * 2) / latRange;
+      xMin = (int)((getWidth() - lngRange * scale) / 2);
+      yMin = PADDING;
     } else {
-      scale = (HEIGHT - PADDING * 2) / lngRange;
+      scale = (getWidth() - PADDING * 2) / lngRange;
+      yMin = (int)((getHeight() - latRange * scale) / 2);
+      xMin = PADDING;
     }
     
     for (int i = 0; i < Airport.Airports.size(); i++) {
       Airport airport = Airport.Airports.get(i);
-      int y = HEIGHT - PADDING - (int)((airport.lat() - minLat) * scale);
-      int x = (int)((airport.lng() - minLng) * scale) + PADDING;
+      int y = -(int)((airport.lat() - minLat) * scale) + getHeight() - yMin;
+      int x = (int)((airport.lng() - minLng) * scale) + xMin;
       gr.drawString(airport.name(), x, y);
-      
-      System.out.println(airport.name());
-      System.out.println("X: " + x + ", Y: " + y);
-      System.out.println("LAT: " + airport.lat() + ", LNG: " + airport.lng());
     }
   }
 }
