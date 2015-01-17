@@ -6,6 +6,8 @@
 * Select airport
  * Display flights to/from selected airport
 * Animate flight
+* Be able to filter out airports
+ * and turn airports off/on via GUI
 
 #### Nat's Proposed method to convert lat-lon values to map cords. ####
 1. Find the highest and lowest longatudes, initalize them as seperate varables.
