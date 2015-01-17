@@ -1,4 +1,8 @@
-#this file tells git what files to ignore. If you don't know what it does don't touch it -nat.
+#If you don't know what it does don't touch it -nat.
 
-#tells git to ignore the .class files.
+#tells git to ignore .class files.
 *.class
+
+#tells git to ignore automaticly created emacs backups
+*~
+*#
