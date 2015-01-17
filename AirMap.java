@@ -43,7 +43,7 @@ public class AirMap extends JPanel{
       yMin = (int)((getHeight() - latRange * scale) / 2);
     }
     
-    int y = -(int)((airport.lat() - minLat) * scale) + getHeight() - yMin;
+    int y = -(int)((lat - minLat) * scale) + getHeight() - yMin;
     return y;
   }
 
