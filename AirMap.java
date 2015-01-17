@@ -28,11 +28,13 @@ public class AirMap extends JPanel{
     return x;
   }
   
+  // calculates a y coordinate from a latitude
   public int getY(float lat) {
     float scale;
     int yMin;
     float latRange = maxLat - minLat;
     float lngRange = maxLng - minLng;
+    
     if (latRange > lngRange) {
       scale = (getHeight() - PADDING * 2) / latRange;
       yMin = PADDING;
@@ -42,6 +44,7 @@ public class AirMap extends JPanel{
     }
     
     int y = -(int)((airport.lat() - minLat) * scale) + getHeight() - yMin;
+    return y;
   }
 
   public static void showMap(){
