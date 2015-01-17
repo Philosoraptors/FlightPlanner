@@ -4,7 +4,7 @@
 * Draw airport labels (DONE)
 * Draw flights between airports
 * Select airport
-  * Display flights to/from selected airport
+ * Display flights to/from selected airport
 * Animate flight
 
 #### Nat's Proposed method to convert lat-lon values to map cords. ####
