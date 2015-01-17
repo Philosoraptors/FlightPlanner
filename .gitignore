@@ -1,0 +1,4 @@
+#this file tells git what files to ignore. If you don't know what it does don't touch it -nat.
+
+#tells git to ignore the .class files.
+*.class
