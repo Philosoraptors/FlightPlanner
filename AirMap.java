@@ -1,66 +1,33 @@
+import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class AirMap extends JPanel{ 
 
-  private static final int WIDTH = 500;
-  private static final int HEIGHT = 500;
-  private static final int PADDING = 30;
+  public int width;
+  public int height;
+  private int padding;
 
   private static float minLng, maxLng, minLat, maxLat;
   
-  // calculates an x coordinate from longitude
-  public int getX(float lng) {
-    float scale;
-    int xMin;
-    float latRange = maxLat - minLat;
-    float lngRange = maxLng - minLng;
-    
-    if (latRange > lngRange) {
-      scale = (this.getHeight() - PADDING * 2) / latRange;
-      xMin = (int)((getWidth() - lngRange * scale) / 2);
-    } else {
-      scale = (getWidth() - PADDING * 2) / lngRange;
-      xMin = PADDING;
-    }
-    
-    int x = (int)((lng - minLng) * scale) + xMin;
-    return x;
-  }
+  // CONSTRUCTOR
   
-  // calculates a y coordinate from a latitude
-  public int getY(float lat) {
-    float scale;
-    int yMin;
-    float latRange = maxLat - minLat;
-    float lngRange = maxLng - minLng;
+  public AirMap(int wid, int hei, int pad) {
+    super();
     
-    if (latRange > lngRange) {
-      scale = (getHeight() - PADDING * 2) / latRange;
-      yMin = PADDING;
-    } else {
-      scale = (getWidth() - PADDING * 2) / lngRange;
-      yMin = (int)((getHeight() - latRange * scale) / 2);
-    }
+    width = wid;
+    height = hei;
+    padding = pad;
     
-    int y = -(int)((lat - minLat) * scale) + getHeight() - yMin;
-    return y;
-  }
-
-  public static void showMap(){
-    JFrame frame = new JFrame("flight map");
-    AirMap map = new AirMap();
-    map.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    frame.getContentPane().add(map);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-    frame.pack();
-    frame.setVisible(true);
+    // calculate minimum and maximum latitude/longitude
+    minLng = maxLng = Airport.Airports.get(0).lng();  // need to initialize variables
+    minLat = maxLat = Airport.Airports.get(0).lat();  // in order to compare them!
     
-    minLng = maxLng = Airport.Airports.get(0).lng();
-    minLat = maxLat = Airport.Airports.get(0).lat();
-    
+    // cycle through airports
     for (int i = 0; i < Airport.Airports.size(); i++) {
       Airport airport = Airport.Airports.get(i);
+      
+      // compare airport to previously stored values
       if (airport.lat() > maxLat) maxLat = airport.lat();
       if (airport.lat() < minLat) minLat = airport.lat();
       if (airport.lng() > maxLng) maxLng = airport.lng();
@@ -68,14 +35,91 @@ public class AirMap extends JPanel{
     }
   }
   
+  // STATIC METHODS
+
+  public static void showMap(){
+    JFrame frame = new JFrame("flight map");
+    AirMap map = new AirMap(500, 500, 30);
+    map.setPreferredSize(new Dimension(map.width, map.height));
+    frame.getContentPane().add(map);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+    frame.pack();
+    frame.setVisible(true);
+  }
+  
+  // PUBLIC METHODS
+  
   public void paintComponent(Graphics gr){
     super.paintComponent(gr);
     
+    // update width and height
+    width = getWidth();
+    height = getHeight();
+    
+    // cycle through airports
     for (int i = 0; i < Airport.Airports.size(); i++) {
       Airport airport = Airport.Airports.get(i);
+      
+      // get coordinates
       int y = getY(airport.lat());
       int x = getX(airport.lng());
+      // draw label
       gr.drawString(airport.name(), x, y);
+      
+      // get flights
+      ArrayList<Flight> flights = airport.departures();
+      
+      // cycle through flights from this airport
+      for (int h = 0; h < flights.size(); h++) {
+        Airport dest = flights.get(h).to();
+        
+        // compute destination coordinates
+        int x2 = getX(dest.lng());
+        int y2 = getY(dest.lat());
+        
+        // draw a line to represent the flight
+        gr.drawLine(x, y, x2, y2);
+      }
     }
+  }
+  
+  // PRIVATE FUNCTIONS
+  
+  // calculates an x coordinate from longitude
+  private int getX(float lng) {
+    float scale;
+    int xMin;
+    float latRange = maxLat - minLat;
+    float lngRange = maxLng - minLng;
+    
+    if (latRange > lngRange) {
+      scale = (height - padding * 2) / latRange;
+      xMin = (int)((width - lngRange * scale) / 2);
+    } else {
+      scale = (width - padding * 2) / lngRange;
+      xMin = padding;
+    }
+    
+    int x = (int)((lng - minLng) * scale) + xMin;
+    return x;
+  }
+  
+  // calculates a y coordinate from a latitude
+  private int getY(float lat) {
+    float scale;
+    int yMin;
+    float latRange = maxLat - minLat;
+    float lngRange = maxLng - minLng;
+    
+    if (latRange > lngRange) {
+      scale = (height - padding * 2) / latRange;
+      yMin = padding;
+    } else {
+      scale = (width - padding * 2) / lngRange;
+      yMin = (int)((height - latRange * scale) / 2);
+    }
+    
+    int y = -(int)((lat - minLat) * scale) + height - yMin;
+    return y;
   }
 }
