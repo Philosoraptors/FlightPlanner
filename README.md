@@ -1,4 +1,12 @@
 # FlightPlanner #
+
+##Features We'd Like To Implement##
+* Draw airport labels (DONE)
+* Draw flights between airports
+* Select airport
+  * Display flights to/from selected airport
+* Animate flight
+
 #### Nat's Proposed method to convert lat-lon values to map cords. ####
 1. Find the highest and lowest longatudes, initalize them as seperate varables.
 2. Subtract the lowest variable from all entries so the lowest will be zero, and the rest will be measured in offset from zero.
