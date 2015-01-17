@@ -2,7 +2,7 @@
 
 ##Features We'd Like To Implement##
 * Draw airport labels (DONE)
-* Draw flights between airports
+* Draw flights between airports (DONE)
 * Select airport
  * Display flights to/from selected airport
 * Animate flight
