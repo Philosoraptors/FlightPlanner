@@ -1,15 +1,16 @@
 import java.util.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class AirMap extends JPanel{ 
+public class AirMap extends JPanel implements MouseListener {
 
   public int width;
   public int height;
   private int padding;
 
   private static float minLng, maxLng, minLat, maxLat;
-  
+
   // CONSTRUCTOR
   
   public AirMap(int wid, int hei, int pad) {
@@ -42,13 +43,14 @@ public class AirMap extends JPanel{
     AirMap map = new AirMap(500, 500, 30);
     map.setPreferredSize(new Dimension(map.width, map.height));
     frame.getContentPane().add(map);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.pack();
     frame.setVisible(true);
   }
   
   // PUBLIC METHODS
   
+  // called when window needs to be drawn
   public void paintComponent(Graphics gr){
     super.paintComponent(gr);
     
@@ -82,6 +84,12 @@ public class AirMap extends JPanel{
       }
     }
   }
+
+  public void mousePressed(MouseEvent e) {}
+  public void mouseReleased(MouseEvent e) {}
+  public void mouseEntered(MouseEvent e) {}
+  public void mouseExited(MouseEvent e) {}
+  public void mouseClicked(MouseEvent e) {}
   
   // PRIVATE FUNCTIONS
   
