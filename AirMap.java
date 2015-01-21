@@ -59,18 +59,16 @@ public class AirMap extends JPanel implements MouseListener {
     height = getHeight();
     
     // cycle through airports
-    for (int i = 0; i < Airport.Airports.size(); i++) {
-      Airport airport = Airport.Airports.get(i);
+    for (Airport airport : Airport.Airports) {
       
       // get coordinates
       int y = getY(airport.lat());
       int x = getX(airport.lng());
-      // draw label
-      gr.drawString(airport.name(), x, y);
+      
       
       // get flights
       ArrayList<Flight> flights = airport.departures();
-      
+     
       // cycle through flights from this airport
       for (int h = 0; h < flights.size(); h++) {
         Airport dest = flights.get(h).to();
@@ -80,10 +78,18 @@ public class AirMap extends JPanel implements MouseListener {
         int y2 = getY(dest.lat());
         
         // draw a line to represent the flight
-	gr.setColor(Color.green);
-        gr.drawLine(x, y, x2, y2);
-	gr.setColor(Color.black);
+        gr.setColor(Color.green);
+        gr.drawLine(x, y, x2, y2);  
+
       }
+    }
+    // this is to writ the names on top of the lines
+    for (Airport airport : Airport.Airports) {
+    
+         int y = getY(airport.lat());
+         int x = getX(airport.lng());
+      gr.setColor(Color.black);
+      gr.drawString(airport.name(), x, y);
     }
   }
 
