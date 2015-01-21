@@ -80,7 +80,9 @@ public class AirMap extends JPanel implements MouseListener {
         int y2 = getY(dest.lat());
         
         // draw a line to represent the flight
+	gr.setColor(Color.green);
         gr.drawLine(x, y, x2, y2);
+	gr.setColor(Color.black);
       }
     }
   }
