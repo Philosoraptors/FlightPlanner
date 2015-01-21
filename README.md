@@ -10,3 +10,25 @@
  * and turn airports off/on via GUI
 
 Perhaps we put these features under issues?
+
+
+####github help####
+if you have git on your linx or mac computer you can control git via the terminal.
+
+ * git clone https://github.com/Philosoraptors/FlightPlanner
+makes a copy of the repository on your computer. Make sure you do this in a folder you don't mind having things dumped in.
+
+ * git pull 
+checks the website for new changes and downloads them to the repository on your computer.
+
+ * git commit -am 'YourMessageHere'
+Saves a commit which can be pushed latter. You should put a message explining what changed in the quotes.
+
+ * git push
+Pushes the commit you just made to the repository on github.
+
+ * git status
+shows you the current status of the repository, including which files are or are not being tracked.
+
+ * git add FileNamehere
+adds files to the repository so they can be committed and pushed.
