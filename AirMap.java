@@ -85,6 +85,7 @@ public class AirMap extends JPanel implements MouseListener {
     }
   }
 
+  // MouseListener events
   public void mousePressed(MouseEvent e) {}
   public void mouseReleased(MouseEvent e) {}
   public void mouseEntered(MouseEvent e) {}

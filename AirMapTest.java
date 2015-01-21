@@ -12,5 +12,9 @@ public class AirMapTest {
 
        // create new AirMap and display it
        AirMap.showMap();
+
+       for (Airport a : Airport.findAirSinks()) {
+         System.out.println(a.name());
+       }
     }
 }

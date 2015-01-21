@@ -111,6 +111,26 @@ public class Airport {
    public static void testItineraries() {
       Airport.named("SEA").listAllCheapest();
    }
+
+   public static ArrayList<Airport> findAirSinks() {
+     int[] flightRatio = new int[Airports.size()];
+     Arrays.fill(flightRatio, 0);
+
+     for (Airport a : Airports) {
+       for (Flight f : a.departures()) {
+         flightRatio[Airports.indexOf(f.from())] += 1;
+         flightRatio[Airports.indexOf(f.to())] -= 1;
+       }
+     }
+
+     ArrayList<Airport> airSinks = new ArrayList<Airport>();
+     for (Airport a : Airports) {
+       if (flightRatio[Airports.indexOf(a)] > 0) {
+         airSinks.add(a);
+       }
+     }
+     return airSinks;
+   }
    
    public static void main (String[] args){   
       loadAirports();     
