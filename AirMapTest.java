@@ -11,8 +11,10 @@ public class AirMapTest {
        Flight.loadFlights();
 
        // create new AirMap and display it
-       AirMap.showMap();
-
+       AirMap funMap = new AirMap(500,500,30);
+       funMap.showMap();
+       
+       System.out.println("The Airport Sinks: Where incoming flights are greater than outgoing flights:");
        for (Airport a : Airport.findAirSinks()) {
          System.out.println(a.name());
        }
