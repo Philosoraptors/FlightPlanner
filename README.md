@@ -4,8 +4,8 @@
 * [x] Draw airport labels 
 * [x] Draw flights between airports 
 * [ ] Get airports to push each other out of the way to prevent overlaps!
-* [ ] Select airport
- * [ ] Display flights to/from selected airport
+* [x] Select airport
+ * [x] Display flights to/from selected airport
 * [ ] Animate flight
 * [ ] Be able to filter out airports
  * [ ] and turn airports off/on via GUI
