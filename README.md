@@ -6,6 +6,7 @@
 * [ ] Get airports to push each other out of the way to prevent overlaps!
 * [x] Select airport
  * [x] Display flights to/from selected airport
+ * [ ] Be able to de-select an airport and display the whole network again.
 * [ ] Animate flight
 * [ ] Be able to filter out airports
  * [ ] and turn airports off/on via GUI
