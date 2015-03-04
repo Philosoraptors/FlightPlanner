@@ -4,14 +4,6 @@
  * Contains buttons/text boxes to interact with AirMap.  The idea
  * is to have two panels within our frame, this being one of them,
  * the AirMap being the other.  -Noah
- **/
-
-/**
- * AirMapInterface
- *
- * Contains buttons/text boxes to interact with AirMap.  The idea
- * is to have two panels within our frame, this being one of them,
- * the AirMap being the other.  -Noah
  * 
  * Made the buttons to click --Michelle
  **/
