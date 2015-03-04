@@ -10,6 +10,9 @@
 * [ ] Animate flight
 * [ ] Be able to filter out airports
  * [ ] and turn airports off/on via GUI
+* [ ] Be able to calculate cheapest route
+* [ ] Be able to select TWO airports to route between
+ * [ ] Be able to display that route
 
 Perhaps we put these features under issues?
 
