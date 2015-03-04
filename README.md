@@ -10,9 +10,9 @@
 * [ ] Animate flight
 * [ ] Be able to filter out airports
  * [ ] and turn airports off/on via GUI
-* [ ] Be able to calculate cheapest route
-* [ ] Be able to select TWO airports to route between
- * [ ] Be able to display that route
+* [ ] Be able to calculate cheapest route                 <-- PRIORITY
+* [ ] Be able to select TWO airports to route between     <-- PRIORITY
+ * [ ] Be able to display that route                      <-- PRIORITY
 
 Perhaps we put these features under issues?
 
