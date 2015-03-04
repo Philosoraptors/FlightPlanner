@@ -19,26 +19,26 @@ public class AirMap extends JPanel implements MouseListener {
     // CONSTRUCTOR
     
     public AirMap(int wid, int hei, int pad) {
-      super();
-      
-      width = wid;
-      height = hei;
-      padding = pad;
-      
-      // calculate minimum and maximum latitude/longitude
-      minLng = maxLng = Airport.Airports.get(0).lng();  // need to initialize variables
-      minLat = maxLat = Airport.Airports.get(0).lat();  // in order to compare them!
-      
-      // cycle through airports
-      for (int i = 0; i < Airport.Airports.size(); i++) {
-          Airport airport = Airport.Airports.get(i);
-          
-          // compare airport to previously stored values
-          if (airport.lat() > maxLat) maxLat = airport.lat();
-          if (airport.lat() < minLat) minLat = airport.lat();
-          if (airport.lng() > maxLng) maxLng = airport.lng();
-          if (airport.lng() < minLng) minLng = airport.lng();
-      }
+	super();
+	
+	width = wid;
+	height = hei;
+	padding = pad;
+	
+	// calculate minimum and maximum latitude/longitude
+	minLng = maxLng = Airport.Airports.get(0).lng();  // need to initialize variables
+	minLat = maxLat = Airport.Airports.get(0).lat();  // in order to compare them!
+	
+	// cycle through airports
+	for (int i = 0; i < Airport.Airports.size(); i++) {
+	    Airport airport = Airport.Airports.get(i);
+	    
+	    // compare airport to previously stored values
+	    if (airport.lat() > maxLat) maxLat = airport.lat();
+	    if (airport.lat() < minLat) minLat = airport.lat();
+	    if (airport.lng() > maxLng) maxLng = airport.lng();
+	    if (airport.lng() < minLng) minLng = airport.lng();
+	}
     }
     
     // STATIC METHODS
