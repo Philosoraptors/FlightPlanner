@@ -82,7 +82,7 @@ public class Airport {
      ///////////////////////////////////////////////////// static (class) methods below   
      
     // some serious Dijkstra stuff
-    static public ArrayList<Flight> findCheapestRoute(Airport from, Airport to) {
+    static public List<Flight> findCheapestRoute(Airport from, Airport to) {
 
       // Set up arrays
 
@@ -209,7 +209,7 @@ public class Airport {
       //showAirports();     // each shows departing flights
       //testItineraries();
 
-      ArrayList<Flight> route = findCheapestRoute(Airport.named(args[0]), Airport.named(args[1]));
+      List<Flight> route = findCheapestRoute(Airport.named(args[0]), Airport.named(args[1]));
       for (Flight f : route) { System.out.println(f.toString()); }
     }
     
