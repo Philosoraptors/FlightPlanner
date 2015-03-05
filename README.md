@@ -13,7 +13,7 @@ It has been decreed that thou shalt use 2 SPACES, not tabs, for 1 is too few, an
 * [ ] Animate flight
 * [ ] Be able to filter out airports
  * [ ] and turn airports off/on via GUI
-* [ ] Be able to calculate cheapest route                 <-- PRIORITY
+* [x] Be able to calculate cheapest route                 <-- PRIORITY
 * [ ] Be able to select TWO airports to route between     <-- PRIORITY
  * [ ] Be able to display that route                      <-- PRIORITY
 
