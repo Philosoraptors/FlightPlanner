@@ -1,5 +1,8 @@
 # FlightPlanner #
 
+####Tabs####
+It has been decreed that thou shalt use 2 SPACES, not tabs, for 1 is too few, and 3 is too many, and 4 is far too many.
+
 ####Features We'd Like To Implement####
 * [x] Draw airport labels 
 * [x] Draw flights between airports 
