@@ -87,4 +87,3 @@ public class AirMapInterface extends JPanel implements ActionListener {
        
      }
 }
-
