@@ -74,9 +74,9 @@ public class AirMapInterface extends JPanel implements ActionListener {
       
       // create new AirMap and display it
       AirMap funMap = new AirMap(700,500,30);
-      
       funMap.setPreferredSize(new Dimension(800, 600));
-      
+
+      frame.addMouseListener(funMap);
       frame.add(buttonPanel, BorderLayout.EAST); // put the button panel on the right
       frame.add(funMap, BorderLayout.WEST); // put the map panel on the left
     
