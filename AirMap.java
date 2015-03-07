@@ -8,11 +8,10 @@ public class AirMap extends JPanel implements MouseListener {
   public int width;
   public int height;
   private int padding;
-  private int xcord;
-  private int ycord;
   private boolean clickBool = false;
-  private String portClick = "";
   private int proximity = 10;
+
+  private Airport selected;
 
   private static float minLng, maxLng, minLat, maxLat;
     
@@ -24,6 +23,8 @@ public class AirMap extends JPanel implements MouseListener {
 	  width = wid;
 	  height = hei;
 	  padding = pad;
+
+    selected = null;
 	
 	  // calculate minimum and maximum latitude/longitude
 	  minLng = maxLng = Airport.Airports.get(0).lng();  // need to initialize variables
@@ -71,11 +72,15 @@ public class AirMap extends JPanel implements MouseListener {
 	    int y = getY(airport.lat());
 	    int x = getX(airport.lng());
 	    
-	    gr.setColor(Color.black);
+	    if (airport == selected) {
+        gr.setColor(Color.red);
+      } else {
+        gr.setColor(Color.black);
+      }
 	    gr.drawString(airport.name(), x, y);
 	    
 	    //Get the value of the airport selected, and draw the name of the airport
-	    if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))){        
+	    /*if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))){        
 		
 		    //Store the airport clicked on
 		    portClick = airport.name();
@@ -85,18 +90,28 @@ public class AirMap extends JPanel implements MouseListener {
 		    gr.drawString("All departing flights from: " + portClick,(width / 2),(height / 10));
 		    gr.setColor(Color.blue);
 		    gr.drawString("All arriving flights from: " + portClick,(width / 2),(height / 10 + 30));
-	   }
+	   }*/
 	}
 	
 	// cycle through airports onc emore in order to draw lines
-    drawAirportLines(gr);
+    //drawAirportLines(gr);
 
   }
 
     // MouseListener events
   public void mousePressed(MouseEvent e) {
-	  xcord = e.getX();
-	  ycord = e.getY(); 
+	  int x = e.getX();
+    int y = e.getY();
+
+    for (Airport a : Airport.Airports) {
+      int ycord = getY(a.lat());
+      int xcord = getX(a.lng());
+
+      if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))) {
+        selected = a;
+      }
+    }
+
 	  repaint();
   }
 
@@ -170,12 +185,12 @@ public class AirMap extends JPanel implements MouseListener {
 		    int y2 = getY(dest.lat());
 		
 		    // draw a line to represent the flight departures
-		    if (flights.get(h).from().name().equals(portClick)){
+		    if (flights.get(h).from() == selected){
 		      gr.setColor(Color.red);
 		      gr.drawLine(x, y, x2, y2);
 		      clickBool = true;  
 		    }
-		    if (flights.get(h).to().name().equals(portClick)){
+		    if (flights.get(h).to() == selected){
 		      gr.setColor(Color.blue);
 		      gr.drawLine(x, y, x2, y2);
 		      clickBool = true;
