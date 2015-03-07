@@ -89,42 +89,8 @@ public class AirMap extends JPanel implements MouseListener {
 	}
 	
 	// cycle through airports onc emore in order to draw lines
-	for (Airport airport : Airport.Airports) {
-	    
-	    // get coordinates
-	    int y = getY(airport.lat());
-	    int x = getX(airport.lng());
-	    
-	    // get flights
-	    ArrayList<Flight> flights = airport.departures();
-	    
-	    // cycle through flights from this airport
-	    for (int h = 0; h < flights.size(); h++) {
-		Airport dest = flights.get(h).to();
-		
-        // compute destination coordinates
-		int x2 = getX(dest.lng());
-		int y2 = getY(dest.lat());
-		
-		// draw a line to represent the flight departures
-		if (flights.get(h).from().name().equals(portClick)){
-		    gr.setColor(Color.red);
-		    gr.drawLine(x, y, x2, y2);
-		    clickBool = true;  
-		}
-		if (flights.get(h).to().name().equals(portClick)){
-		    gr.setColor(Color.blue);
-		    gr.drawLine(x, y, x2, y2);
-		    clickBool = true;
-		}
-		else {
-		    if (clickBool == false){
-			gr.setColor(Color.green);
-			gr.drawLine(x, y, x2, y2);  
-		    }
-		}
-	    }
-	}
+    drawAirportLines(gr);
+
     }
 
     // MouseListener events
@@ -139,7 +105,7 @@ public class AirMap extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {}
     
     // PRIVATE FUNCTIONS
-    
+  
     // calculates an x coordinate from longitude
     private int getX(float lng) {
 	float scale;
@@ -177,4 +143,48 @@ public class AirMap extends JPanel implements MouseListener {
 	int y = -(int)((lat - minLat) * scale) + height - yMin;
 	return y;
     }
+
+  //STATIC FUNCTIONS
+
+  //
+  private void drawAirportLines(Graphics gr) {
+
+	  for (Airport airport : Airport.Airports) {
+	    
+	    // get coordinates
+	    int y = getY(airport.lat());
+	    int x = getX(airport.lng());
+	    
+	    // get flights
+	    ArrayList<Flight> flights = airport.departures();
+	    
+	    // cycle through flights from this airport
+	    for (int h = 0; h < flights.size(); h++) {
+		Airport dest = flights.get(h).to();
+		
+        // compute destination coordinates
+		int x2 = getX(dest.lng());
+		int y2 = getY(dest.lat());
+		
+		// draw a line to represent the flight departures
+		if (flights.get(h).from().name().equals(portClick)){
+		    gr.setColor(Color.red);
+		    gr.drawLine(x, y, x2, y2);
+		    clickBool = true;  
+		}
+		if (flights.get(h).to().name().equals(portClick)){
+		    gr.setColor(Color.blue);
+		    gr.drawLine(x, y, x2, y2);
+		    clickBool = true;
+		}
+		else {
+		    if (clickBool == false){
+			gr.setColor(Color.green);
+			gr.drawLine(x, y, x2, y2);  
+		}
+		}
+	    }
+	}
+  }
+
 }
