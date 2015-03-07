@@ -4,7 +4,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class AirMap extends JPanel implements MouseListener {
-    
   public int width;
   public int height;
   private int padding;
@@ -14,26 +13,26 @@ public class AirMap extends JPanel implements MouseListener {
   private Airport selected;
 
   private static float minLng, maxLng, minLat, maxLat;
-    
+
   // CONSTRUCTOR
-    
+
   public AirMap(int wid, int hei, int pad) {
 	  super();
-	
+
 	  width = wid;
 	  height = hei;
 	  padding = pad;
 
     selected = null;
-	
+
 	  // calculate minimum and maximum latitude/longitude
 	  minLng = maxLng = Airport.Airports.get(0).lng();  // need to initialize variables
 	  minLat = maxLat = Airport.Airports.get(0).lat();  // in order to compare them!
-	
+
 	  // cycle through airports
 	  for (int i = 0; i < Airport.Airports.size(); i++) {
 	    Airport airport = Airport.Airports.get(i);
-	    
+
 	    // compare airport to previously stored values
 	    if (airport.lat() > maxLat) maxLat = airport.lat();
 	    if (airport.lat() < minLat) minLat = airport.lat();
@@ -41,9 +40,10 @@ public class AirMap extends JPanel implements MouseListener {
 	    if (airport.lng() < minLng) minLng = airport.lng();
 	  }
   }
-    
-    // STATIC METHODS
-    
+
+
+  // STATIC METHODS
+
   public void showMap(){
 	  JFrame frame = new JFrame("flight map");
 	  setPreferredSize(new Dimension(500, 500));
@@ -53,58 +53,58 @@ public class AirMap extends JPanel implements MouseListener {
 	  frame.pack();
 	  frame.setVisible(true);
   }
-    
-    // PUBLIC METHODS
+
+  // PUBLIC METHODS
 
   public Airport getSelected() {
     return selected;
   }
-    
-    // called when window needs to be drawn
+
+  // called when window needs to be drawn
   public void paintComponent(Graphics gr){
 	  super.paintComponent(gr);
-	
-  // update width and height
+
+    // update width and height
 	  width = getWidth();
 	  height = getHeight();
-	
-	// cycle through airports first to place airport names and 
-	// look to see what airport has been selected (clicked).
+
+    // cycle through airports first to place airport names and
+    // look to see what airport has been selected (clicked).
 	  for (Airport airport : Airport.Airports) {
-	    
+
 	    // get coordinates
 	    int y = getY(airport.lat());
 	    int x = getX(airport.lng());
-	    
-	    if (airport == selected) {
+
+      if (airport == selected) {
         gr.setColor(Color.red);
       } else {
         gr.setColor(Color.black);
       }
 	    gr.drawString(airport.name(), x, y);
-	    
+
 	    //Get the value of the airport selected, and draw the name of the airport
-	    /*if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))){        
-		
+	    /*if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))) {
+
 		    //Store the airport clicked on
 		    portClick = airport.name();
-		
+
 		    //Draw the text string the color of the flight lines to be a key
 		    gr.setColor(Color.red);
 		    gr.drawString("All departing flights from: " + portClick,(width / 2),(height / 10));
 		    gr.setColor(Color.blue);
 		    gr.drawString("All arriving flights from: " + portClick,(width / 2),(height / 10 + 30));
 	   }*/
-	}
-	
-	// cycle through airports onc emore in order to draw lines
+    }
+
+	  // cycle through airports onc emore in order to draw lines
     //drawAirportLines(gr);
 
   }
 
-    // MouseListener events
+  // MouseListener events
   public void mousePressed(MouseEvent e) {
-	  int mouseX = e.getX();
+    int mouseX = e.getX();
     int mouseY = e.getY();
 
     int minDistSq = Integer.MAX_VALUE;
@@ -127,41 +127,39 @@ public class AirMap extends JPanel implements MouseListener {
   public void mouseEntered(MouseEvent e) {}
   public void mouseExited(MouseEvent e) {}
   public void mouseClicked(MouseEvent e) {}
-    
-    // PRIVATE FUNCTIONS
-  
+
+  // PRIVATE FUNCTIONS
+
   // calculates an x coordinate from longitude
   private int getX(float lng) {
 	  float scale;
 	  int xMin;
 	  float latRange = maxLat - minLat;
 	  float lngRange = maxLng - minLng;
-    
-	if (latRange > lngRange) {
+
+    if (latRange > lngRange) {
 	    scale = (height - padding * 2) / latRange;
 	    xMin = (int)((width - lngRange * scale) / 2);
-	} 
-  else {
-	    scale = (width - padding * 2) / lngRange;
-	    xMin = padding;
-	}
-	
-	int x = (int)((lng - minLng) * scale) + xMin;
-	return x;
+	  } else {
+      scale = (width - padding * 2) / lngRange;
+      xMin = padding;
     }
-    
+
+    int x = (int)((lng - minLng) * scale) + xMin;
+    return x;
+  }
+
   // calculates a y coordinate from a latitude
   private int getY(float lat) {
 	  float scale;
 	  int yMin;
 	  float latRange = maxLat - minLat;
 	  float lngRange = maxLng - minLng;
-	
+
 	  if (latRange > lngRange) {
 	    scale = (height - padding * 2) / latRange;
 	    yMin = padding;
-	  } 
-    else {
+	  } else {
 	    scale = (width - padding * 2) / lngRange;
 	    yMin = (int)((height - latRange * scale) / 2);
 	  }
@@ -170,33 +168,31 @@ public class AirMap extends JPanel implements MouseListener {
 	  return y;
   }
 
-  //STATIC FUNCTIONS
-
   //Draws lines
   private void drawAirportLines(Graphics gr) {
 
 	  for (Airport airport : Airport.Airports) {
-	    
+
 	    // get coordinates
 	    int y = getY(airport.lat());
 	    int x = getX(airport.lng());
-	    
+
 	    // get flights
 	    ArrayList<Flight> flights = airport.departures();
-	    
+
 	    // cycle through flights from this airport
 	    for (int h = 0; h < flights.size(); h++) {
 		    Airport dest = flights.get(h).to();
-		
+
         // compute destination coordinates
 		    int x2 = getX(dest.lng());
 		    int y2 = getY(dest.lat());
-		
+
 		    // draw a line to represent the flight departures
 		    if (flights.get(h).from() == selected){
 		      gr.setColor(Color.red);
 		      gr.drawLine(x, y, x2, y2);
-		      clickBool = true;  
+		      clickBool = true;
 		    }
 		    if (flights.get(h).to() == selected){
 		      gr.setColor(Color.blue);
@@ -206,7 +202,7 @@ public class AirMap extends JPanel implements MouseListener {
 		    else {
 		      if (clickBool == false){
 			      gr.setColor(Color.green);
-			      gr.drawLine(x, y, x2, y2);  
+			      gr.drawLine(x, y, x2, y2);
 		      }
 		    }
 	    }
