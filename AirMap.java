@@ -55,6 +55,10 @@ public class AirMap extends JPanel implements MouseListener {
   }
     
     // PUBLIC METHODS
+
+  public Airport getSelected() {
+    return selected;
+  }
     
     // called when window needs to be drawn
   public void paintComponent(Graphics gr){
@@ -100,15 +104,19 @@ public class AirMap extends JPanel implements MouseListener {
 
     // MouseListener events
   public void mousePressed(MouseEvent e) {
-	  int x = e.getX();
-    int y = e.getY();
+	  int mouseX = e.getX();
+    int mouseY = e.getY();
+
+    int minDistSq = Integer.MAX_VALUE;
 
     for (Airport a : Airport.Airports) {
-      int ycord = getY(a.lat());
-      int xcord = getX(a.lng());
+      int portX = getX(a.lng());
+      int portY = getY(a.lat());
+      int distSq = (mouseX - portX) * (mouseX - portX) + (mouseY - portY) * (mouseY - portY);
 
-      if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))) {
+      if (distSq < minDistSq) {
         selected = a;
+        minDistSq = distSq;
       }
     }
 
