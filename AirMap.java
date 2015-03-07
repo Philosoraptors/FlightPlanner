@@ -146,7 +146,7 @@ public class AirMap extends JPanel implements MouseListener {
 
   //STATIC FUNCTIONS
 
-  //
+  //Draws lines
   private void drawAirportLines(Graphics gr) {
 
 	  for (Airport airport : Airport.Airports) {
@@ -160,31 +160,31 @@ public class AirMap extends JPanel implements MouseListener {
 	    
 	    // cycle through flights from this airport
 	    for (int h = 0; h < flights.size(); h++) {
-		Airport dest = flights.get(h).to();
+		    Airport dest = flights.get(h).to();
 		
         // compute destination coordinates
-		int x2 = getX(dest.lng());
-		int y2 = getY(dest.lat());
+		    int x2 = getX(dest.lng());
+		    int y2 = getY(dest.lat());
 		
-		// draw a line to represent the flight departures
-		if (flights.get(h).from().name().equals(portClick)){
-		    gr.setColor(Color.red);
-		    gr.drawLine(x, y, x2, y2);
-		    clickBool = true;  
-		}
-		if (flights.get(h).to().name().equals(portClick)){
-		    gr.setColor(Color.blue);
-		    gr.drawLine(x, y, x2, y2);
-		    clickBool = true;
-		}
-		else {
-		    if (clickBool == false){
-			gr.setColor(Color.green);
-			gr.drawLine(x, y, x2, y2);  
-		}
-		}
+		    // draw a line to represent the flight departures
+		    if (flights.get(h).from().name().equals(portClick)){
+		      gr.setColor(Color.red);
+		      gr.drawLine(x, y, x2, y2);
+		      clickBool = true;  
+		    }
+		    if (flights.get(h).to().name().equals(portClick)){
+		      gr.setColor(Color.blue);
+		      gr.drawLine(x, y, x2, y2);
+		      clickBool = true;
+		    }
+		    else {
+		      if (clickBool == false){
+			      gr.setColor(Color.green);
+			      gr.drawLine(x, y, x2, y2);  
+		      }
+		    }
 	    }
-	}
+	  }
   }
 
 }
