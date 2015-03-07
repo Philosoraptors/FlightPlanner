@@ -20,21 +20,21 @@ public class AirMapInterface extends JPanel implements ActionListener {
   public static final int FROM = 2;
   public int mode;
   
-  public static JPanel buttonPanel = new JPanel(new GridBagLayout()); //make the panel for the buttons
+  public JPanel buttonPanel = new JPanel(new GridBagLayout()); //make the panel for the buttons
       
-      public static JButton fromButton = new JButton("Departure");
-      public static JButton toButton = new JButton("Destination");
-      public static JButton quitButton = new JButton("Quit");
+      public JButton fromButton = new JButton("Departure");
+      public JButton toButton = new JButton("Destination");
+      public JButton quitButton = new JButton("Quit");
       
       
   
   public AirMapInterface() { 
      setPreferredSize(new Dimension(600, 600));
-     //this.add(fromButton);
+     this.add(fromButton);
+     this.add(toButton);
+     this.add(quitButton);     
      fromButton.addActionListener(this);
-     //this.add(toButton);
      toButton.addActionListener(this);
-     this.add(quitButton);
      quitButton.addActionListener(this);
       
       
@@ -50,7 +50,7 @@ public class AirMapInterface extends JPanel implements ActionListener {
    
   }
      
-  public static void TravelMap(){
+  public void TravelMap(){
      
       JFrame frame = new JFrame("Travel Map");
       frame.setVisible(true);
@@ -94,8 +94,9 @@ public class AirMapInterface extends JPanel implements ActionListener {
 // load airports and flights
       Airport.loadAirports();
       Flight.loadFlights();
+      AirMapInterface funInterface = new AirMapInterface();
       
-      TravelMap();
+      funInterface.TravelMap();
        
      }
 }
