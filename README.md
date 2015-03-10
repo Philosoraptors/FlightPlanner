@@ -14,8 +14,8 @@ It has been decreed that thou shalt use 2 SPACES, not tabs, for 1 is too few, an
 * [ ] Be able to filter out airports
  * [ ] and turn airports off/on via GUI
 * [x] Be able to calculate cheapest route                 <-- PRIORITY
-* [ ] Be able to select TWO airports to route between     <-- PRIORITY
- * [ ] Be able to display that route                      <-- PRIORITY
+* [x] Be able to select TWO airports to route between     <-- PRIORITY
+ * [x] Be able to display that route                      <-- PRIORITY
 
 Perhaps we put these features under issues?
 
