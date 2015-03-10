@@ -102,7 +102,6 @@ public class Airport {
         } else {
           cost[aID] = 0f;                        // else initial cost is 0
           prev[aID] = null;
-          System.out.println("Found origin: " + a.name());
         }
 
         // add to unvisited

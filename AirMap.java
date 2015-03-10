@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.util.List; // because both java.awt.List and java.util.List exist
+
 public class AirMap extends JPanel implements MouseListener {
   public int width;
   public int height;
@@ -14,6 +16,8 @@ public class AirMap extends JPanel implements MouseListener {
 
   private static float minLng, maxLng, minLat, maxLat;
 
+  private List<Flight> route;
+
   // CONSTRUCTOR
 
   public AirMap(int wid, int hei, int pad) {
@@ -23,7 +27,10 @@ public class AirMap extends JPanel implements MouseListener {
 	  height = hei;
 	  padding = pad;
 
+    setPreferredSize(new Dimension(width, height));
+
     selected = null;
+    route = null;
 
 	  // calculate minimum and maximum latitude/longitude
 	  minLng = maxLng = Airport.Airports.get(0).lng();  // need to initialize variables
@@ -83,6 +90,11 @@ public class AirMap extends JPanel implements MouseListener {
       }
 	    gr.drawString(airport.name(), x, y);
 
+      // draw route
+      if (route != null) {
+        drawRoute(gr);
+      }
+
 	    //Get the value of the airport selected, and draw the name of the airport
 	    /*if ((y >= (ycord - proximity) && y <= (ycord + proximity)) && (x > (xcord - proximity * 3) && (x <= xcord))) {
 
@@ -127,6 +139,10 @@ public class AirMap extends JPanel implements MouseListener {
   public void mouseEntered(MouseEvent e) {}
   public void mouseExited(MouseEvent e) {}
   public void mouseClicked(MouseEvent e) {}
+
+  public void setRoute(List<Flight> r) {
+    this.route = r;
+  }
 
   // PRIVATE FUNCTIONS
 
@@ -207,6 +223,22 @@ public class AirMap extends JPanel implements MouseListener {
 		    }
 	    }
 	  }
+  }
+
+  private void drawRoute(Graphics gr) {
+    for (Flight f : route) {
+      drawLine(gr, f.from(), f.to());
+    }
+  }
+
+  private void drawLine(Graphics gr, Airport from, Airport to) {
+    int x1 = getX(from.lng());
+    int y1 = getY(from.lat());
+
+    int x2 = getX(to.lng());
+    int y2 = getY(to.lat());
+
+    gr.drawLine(x1, y1, x2, y2);
   }
 
 }

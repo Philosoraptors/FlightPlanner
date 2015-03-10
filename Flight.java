@@ -27,6 +27,10 @@ public class Flight {
   public String toString(){
       return (num + " " + origin.name() + " " + dest.name() + " " + depart + " " + arrive + " " + cost + " " + seats + " " + airline);
   }
+
+  public String toStringFriendly() {
+    return origin.name() + " to " + dest.name() + ": $" + cost + ", " + airline + " flight " + num;
+  }
     
     public float cost() { return (cost); }
     
