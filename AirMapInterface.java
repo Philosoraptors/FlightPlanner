@@ -25,6 +25,7 @@ public class AirMapInterface extends JPanel implements ActionListener {
   public JButton toButton = new JButton("Destination");
   public JButton routeButton = new JButton("Route");
   public JButton quitButton = new JButton("Quit");
+  public JButton showallButton = new JButton("Show all");
 
   private JTextField fromLabel = new JTextField(3);
   private JTextField toLabel = new JTextField(3);
@@ -59,6 +60,7 @@ public class AirMapInterface extends JPanel implements ActionListener {
 
       Box buttonBox = new Box(BoxLayout.LINE_AXIS);
       buttonBox.add(routeButton);
+      buttonBox.add(showallButton);
       buttonBox.add(quitButton);
 
       buttons.add(buttonBox);
@@ -83,6 +85,7 @@ public class AirMapInterface extends JPanel implements ActionListener {
       toButton.addActionListener(this);
       quitButton.addActionListener(this);
       routeButton.addActionListener(this);
+      showallButton.addActionListener(this);
   }
 
    public void actionPerformed(ActionEvent e){
@@ -94,6 +97,8 @@ public class AirMapInterface extends JPanel implements ActionListener {
      } else if (e.getSource() == toButton) {
        to = funMap.getSelected();
        toLabel.setText(to.name());
+     } else if (e.getSource() == showallButton) {
+        AirMap.toggleDrawAll();
      } else if (e.getSource() == routeButton) {
        if (from != null && to != null) {
          List<Flight> route = Airport.findCheapestRoute(from, to);

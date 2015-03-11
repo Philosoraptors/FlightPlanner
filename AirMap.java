@@ -11,6 +11,7 @@ public class AirMap extends JPanel implements MouseListener {
   private int padding;
   private boolean clickBool = false;
   private int proximity = 10;
+  public static boolean drawAll = false;
 
   private Airport selected;
 
@@ -93,6 +94,9 @@ public class AirMap extends JPanel implements MouseListener {
       // draw route
       if (route != null) {
         drawRoute(gr);
+      }
+      if (drawAll == true) {
+        drawAirportLines(gr);
       }
 
 	    //Get the value of the airport selected, and draw the name of the airport
@@ -204,6 +208,13 @@ public class AirMap extends JPanel implements MouseListener {
 		    int x2 = getX(dest.lng());
 		    int y2 = getY(dest.lat());
 
+        if (clickBool == false){
+			      gr.setColor(Color.green);
+			      gr.drawLine(x, y, x2, y2);
+		    }
+
+    //This section is commented out until we want to reimplement the 'click on airport and show flights to/from that airport
+/*
 		    // draw a line to represent the flight departures
 		    if (flights.get(h).from() == selected){
 		      gr.setColor(Color.red);
@@ -221,6 +232,7 @@ public class AirMap extends JPanel implements MouseListener {
 			      gr.drawLine(x, y, x2, y2);
 		      }
 		    }
+*/
 	    }
 	  }
   }
@@ -239,6 +251,15 @@ public class AirMap extends JPanel implements MouseListener {
     int y2 = getY(to.lat());
 
     gr.drawLine(x1, y1, x2, y2);
+  }
+
+  public static void toggleDrawAll() {
+    if (drawAll == false) {
+      drawAll = true;
+    }
+    else {
+      drawAll = false;
+    }
   }
 
 }
