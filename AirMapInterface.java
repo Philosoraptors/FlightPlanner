@@ -34,53 +34,58 @@ public class AirMapInterface extends JPanel implements ActionListener {
   public AirMapInterface() {
       super();
 
-      funMap = new AirMap(800, 500, 30);
-      funMap.setAlignmentX(Component.LEFT_ALIGNMENT);
-      funMap.setBorder(BorderFactory.createTitledBorder("Airports"));
+      // this essentially sets up the whole view,
+      // by adding components to "this" - a JPanel.
+      // The JFrame is set up later.
+
+      // Add an airmap
+      funMap = new AirMap(800, 500, 30);                                // create map with width 800, height 500, padding 30
+      funMap.setAlignmentX(Component.LEFT_ALIGNMENT);                   // align to left
+      funMap.setBorder(BorderFactory.createTitledBorder("Airports"));   // give it a named border
       this.add(funMap);
 
-      Box gui = new Box(BoxLayout.PAGE_AXIS);
-      gui.setAlignmentX(Component.RIGHT_ALIGNMENT);
-      gui.setPreferredSize(new Dimension(300, 500));
+      Box gui = new Box(BoxLayout.PAGE_AXIS);                           // create a container (a "Box"), to right side of the page
+                                                                        // BoxLayout.PAGE_AXIS makes it a vertical layout
+      gui.setAlignmentX(Component.RIGHT_ALIGNMENT);                     // align to right
+      gui.setPreferredSize(new Dimension(300, 500));                    // set prefferred size
 
-      Box buttons = new Box(BoxLayout.PAGE_AXIS);
-      buttons.setMaximumSize(new Dimension(300, 400));
+      Box buttons = new Box(BoxLayout.PAGE_AXIS);                       // create a container for the buttons
+      buttons.setBorder(BorderFactory.createTitledBorder("Find Route"));  // give it a named border
+      buttons.setAlignmentY(Component.TOP_ALIGNMENT);                   // align to top
 
-      Box fromBox = new Box(BoxLayout.LINE_AXIS);
-      fromBox.add(fromButton);
-      fromBox.add(fromLabel);
-      fromLabel.setEditable(false);
-      buttons.add(fromBox);
+      Box fromBox = new Box(BoxLayout.LINE_AXIS);                       // LINE_AXIS creates a horizontal container
+      fromBox.add(fromButton);                                          // add from button
+      fromBox.add(fromLabel);                                           // add the from text field
+      fromLabel.setEditable(false);                                     // turn off user editing on the text field
+      buttons.add(fromBox);                                             // add to buttons
 
-      Box toBox = new Box(BoxLayout.LINE_AXIS);
-      toBox.add(toButton);
-      toBox.add(toLabel);
-      toLabel.setEditable(false);
-      buttons.add(toBox);
+      Box toBox = new Box(BoxLayout.LINE_AXIS);                         // do the same for the to button
+      toBox.add(toButton);                                              // add to button
+      toBox.add(toLabel);                                               // add text field
+      toLabel.setEditable(false);                                       // turn off editing
+      buttons.add(toBox);                                               // add to buttons
 
-      Box buttonBox = new Box(BoxLayout.LINE_AXIS);
-      buttonBox.add(routeButton);
-      buttonBox.add(showallButton);
-      buttonBox.add(quitButton);
+      Box buttonBox = new Box(BoxLayout.LINE_AXIS);                     // create another horizontal container for the misc buttons
+      buttonBox.add(routeButton);                                       // add route button
+      buttonBox.add(showallButton);                                     // add show all button
+      buttonBox.add(quitButton);                                        // add quit button
 
-      buttons.add(buttonBox);
+      buttons.add(buttonBox);                                           // add horizontal container to buttons
 
-      buttons.setBorder(BorderFactory.createTitledBorder("Find Route"));
-      buttons.setAlignmentY(Component.TOP_ALIGNMENT);
 
-      gui.add(buttons);
+      gui.add(buttons);                                                 // add buttons to the gui
 
-      JPanel outputBox = new JPanel();
-      outputBox.setPreferredSize(new Dimension(300, 200));
-      outputBox.setBorder(BorderFactory.createTitledBorder("Cheapest Route"));
-      outputBox.add(outputLabel);
-      outputBox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+      JPanel outputBox = new JPanel();                                  // create a JPanel for outputBox, because JPanel works better for sizing for some reason
+      outputBox.setPreferredSize(new Dimension(300, 500));              // expand to fill available space
+      outputBox.setBorder(BorderFactory.createEtchedBorder());          // add border
+      outputBox.add(outputLabel);                                       // add output label
+      outputBox.setAlignmentY(Component.BOTTOM_ALIGNMENT);              // align to bottom
 
-      gui.add(Box.createVerticalGlue());
-      gui.add(outputBox);
+      gui.add(outputBox);                                               // add outputBox to gui
 
-      this.add(gui);
+      this.add(gui);                                                    // add gui to this
 
+      // add action listeners
       fromButton.addActionListener(this);
       toButton.addActionListener(this);
       quitButton.addActionListener(this);
@@ -101,15 +106,12 @@ public class AirMapInterface extends JPanel implements ActionListener {
         AirMap.toggleDrawAll();
      } else if (e.getSource() == routeButton) {
        if (from != null && to != null) {
+         // calculate route
          List<Flight> route = Airport.findCheapestRoute(from, to);
          funMap.setRoute(route);
          funMap.repaint();
 
-         from = null;
-         to = null;
-         fromLabel.setText("");
-         toLabel.setText("");
-
+         // string together output (note that output uses HTML for line breaks and formatting)
          String output = "<html>";
          float cost = 0;
 
@@ -120,6 +122,12 @@ public class AirMapInterface extends JPanel implements ActionListener {
          output += "<b>Total: $" + cost + "</b>";
          output += "</html>";
          outputLabel.setText(output);
+
+         // reset to and from
+         from = null;
+         to = null;
+         fromLabel.setText("");
+         toLabel.setText("");
        }
      }
 
