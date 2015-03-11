@@ -7,10 +7,10 @@ This program implements Dijkstra's Algorithm to calculate the flight itinerary t
   
 ####HOW TO USE FLIGHTPLANNER####
   * The main program is run through AirMapInterface.java.  
-    1 Click on the three letter airport code in the Airports map
-    2 Click 'Departure' to set the dearting airport
-    3 Repeat steps 2 and 3 for destination
-    4 Click 'Route' to show the flight path and the cheapest route found
+  * 1 Click on the three letter airport code in the Airports map
+  * 2 Click 'Departure' to set the dearting airport
+  * 3 Repeat steps 2 and 3 for destination
+  * 4 Click 'Route' to show the flight path and the cheapest route found
   * 'Show All' shows all the paths connecting the airports.
   * 'Quit' will exit the program
 
