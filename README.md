@@ -5,7 +5,7 @@ This is a student project from Intro to Java Programming (Winter '15) through Th
 
 This program implements Dijkstra's Algorithm to calculate the flight itinerary that has the cheapest rate. The user chooses the departing and destination airports. 
   
- ####HOW TO USE FLIGHTPLANNER####
+####HOW TO USE FLIGHTPLANNER####
   * The main program is run through AirMapInterface.java.  
     1 Click on the three letter airport code in the Airports map
     2 Click 'Departure' to set the dearting airport
