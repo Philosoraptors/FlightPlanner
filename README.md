@@ -1,24 +1,18 @@
 # FlightPlanner #
 
-####Tabs####
-It has been decreed that thou shalt use 2 SPACES, not tabs, for 1 is too few, and 3 is too many, and 4 is far too many.
+####Team Philosoraptor: Jeff, Noah, Michelle, Nat, Kevin, and Sharon####
+This is a student project from Intro to Java Programming (Winter '15) through The Evergreen State College.
 
-####Features We'd Like To Implement####
-* [x] Draw airport labels 
-* [x] Draw flights between airports 
-* [ ] Get airports to push each other out of the way to prevent overlaps!
-* [x] Select airport
- * [x] Display flights to/from selected airport
- * [ ] Be able to de-select an airport and display the whole network again.
-* [ ] Animate flight
-* [ ] Be able to filter out airports
- * [ ] and turn airports off/on via GUI
-* [x] Be able to calculate cheapest route                 <-- PRIORITY
-* [x] Be able to select TWO airports to route between     <-- PRIORITY
- * [x] Be able to display that route                      <-- PRIORITY
-
-Perhaps we put these features under issues?
-
+This program implements Dijkstra's Algorithm to calculate the flight itinerary that has the cheapest rate. The user chooses the departing and destination airports. 
+  
+ ####HOW TO USE FLIGHTPLANNER####
+  * The main program is run through AirMapInterface.java.  
+    1 Click on the three letter airport code in the Airports map
+    2 Click 'Departure' to set the dearting airport
+    3 Repeat steps 2 and 3 for destination
+    4 Click 'Route' to show the flight path and the cheapest route found
+  * 'Show All' shows all the paths connecting the airports.
+  * 'Quit' will exit the program
 
 ####github help####
 if you have git on your linx or mac computer you can control git via the terminal.
